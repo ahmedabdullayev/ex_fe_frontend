@@ -4,11 +4,17 @@
   <div class="add_form">
   <form v-on:submit.prevent="submitForm">
     <input type="text" id="fname" name="firstname" placeholder="Category name.." v-model="form.name">
-    <div v-if="form.success">
+    <div v-if="form.success == true">
     <div class="success-msg">
       <i class="fa fa-check"></i>
       Category {{form.name}} was successfully added!
     </div>
+    </div>
+    <div v-if="form.success == false">
+      <div class="error-msg">
+        <i class="fa fa-times-circle"></i>
+        Error! Max length is 15 and min is 3! Also could be same category name!
+      </div>
     </div>
     <input type="submit" value="Submit">
   </form>
@@ -25,7 +31,7 @@ export default defineComponent({
     return{
       form: {
         name: '',
-        success: false,
+        success: 'nothing',
       }
     }
   },
@@ -37,9 +43,13 @@ export default defineComponent({
         this.form.success = true
       })
       .catch((error) =>{
+        this.form.success = false
         console.warn(error)
       })
     }
+  },
+  mounted() {
+    console.warn(this.form.success)
   }
 })
 
@@ -48,10 +58,19 @@ export default defineComponent({
 <style lang="less">
 @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
 
-.success-msg{
+.success-msg,
+.error-msg{
   margin: 10px 0;
   padding: 10px;
   border-radius: 3px 3px 3px 3px;
+  color: #270;
+  background-color: #DFF2BF;
+}
+.error-msg {
+  color: #D8000C;
+  background-color: #FFBABA;
+}
+.success-msg {
   color: #270;
   background-color: #DFF2BF;
 }
@@ -74,7 +93,7 @@ input[type=text], select {
 }
 input[type=submit] {
   width: 100%;
-  background-color: #4CAF50;
+  background-color: #42b983;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;

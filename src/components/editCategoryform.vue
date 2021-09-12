@@ -1,14 +1,22 @@
 <template id="editCategoryform-component">
-  <h1>{{$route.params.query}} "{{$route.params.category}}" category</h1>
+  <h1>Edit "{{$route.params.category}}" category</h1>
   <div className="add_form">
     <form v-on:submit.prevent="submitForm">
       <input type="text" id="fname" placeholder="Category name.." v-model="form.name">
-      <div v-if="form.success">
-        <div className="success-msg">
-          <i className="fa fa-check"></i>
-          Category {{ $route.params.category }} was successfully edited! Now it's {{form.name}}
+
+      <div v-if="form.success == true">
+        <div class="success-msg">
+          <i class="fa fa-check"></i>
+          Category {{ $route.params.category }} was successfully edited!
         </div>
       </div>
+      <div v-if="form.success == false">
+        <div class="error-msg">
+          <i class="fa fa-times-circle"></i>
+          Error! Max length is 15 and min is 3! Also could be same category name!
+        </div>
+      </div>
+
       <input type="submit" value="Submit">
     </form>
   </div>
@@ -24,7 +32,7 @@ export default defineComponent({
     return {
       form: {
         name: '',
-        success: false,
+        success: 'nothing',
         id: '',
       }
     }
@@ -39,6 +47,7 @@ export default defineComponent({
             this.form.success = true
           })
           .catch((error) => {
+            this.form.success = false
             console.warn(error)
           })
     }
@@ -52,11 +61,19 @@ export default defineComponent({
 
 <style lang="less">
 @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
-
-.success-msg {
+.success-msg,
+.error-msg{
   margin: 10px 0;
   padding: 10px;
   border-radius: 3px 3px 3px 3px;
+  color: #270;
+  background-color: #DFF2BF;
+}
+.error-msg {
+  color: #D8000C;
+  background-color: #FFBABA;
+}
+.success-msg {
   color: #270;
   background-color: #DFF2BF;
 }

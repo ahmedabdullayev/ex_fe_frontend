@@ -2,20 +2,12 @@
 <div>
 
   <div v-if="init">
-<!--    <li v-for="category in categs" :key="category.id" >-->
-<!--    <router-link :to="{ name: 'user', params: { username: category.name  } }"> Greg</router-link>-->
-<!--    </li>-->
-<!--    <router-link v-for="route in categs" :key="route.id" :to="route.name">-->
-<!--      {{route.name}}-->
-<!--    </router-link>-->
-    <li v-for="category in categs" :key="category.id" >
-    <router-link :to="`/posts/${category.name}`">{{ category.name }}</router-link> |
-    <router-link :to="`/category/edit/${category.name}/${category.id}`">Edit</router-link>
-    </li>
-
-    <!--  <li v-for="category in categs" :key="category.id" >-->
-<!--    <router-link :to="{ name: 'posts', params: {id: category.name} }" > {{category.name}}</router-link>-->
-<!--  </li>-->
+  <div class="wrapper">
+    <div class="a" v-for="category in categs" :key="category.id" >
+    <router-link  :to="`/posts/${category.name}`">{{ category.name }}</router-link> |
+    <router-link  :to="`/category/edit/${category.name}/${category.id}`">Edit</router-link>
+    </div>
+  </div>
   </div>
 </div>
 </template>
@@ -55,6 +47,27 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style>
 
+
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(50px, auto);
+  grid-gap: 5px;
+}
+
+
+
+.a {
+  margin: 0 3px;
+  color: #1195c9;
+  border: 3px solid #4CAF50;
+  background: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
 </style>

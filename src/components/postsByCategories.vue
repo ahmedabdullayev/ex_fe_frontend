@@ -1,27 +1,20 @@
 <template >
   <div class="page">
-    <!--    <ul>-->
-    <!--&lt;!&ndash;      <h1 v-on:click="tester">click</h1>&ndash;&gt;-->
-    <!--      {{this.posts}}-->
-    <!--      <li v-for="post in posts" :key="post.id">-->
-    <!--        -->
-    <!--        <h1>Post #{{post.id}}</h1>-->
-    <!--        <p>{{post.content}}</p>-->
-    <!--        <button v-on:click="deletePost(post.id)">Delete</button>-->
-    <!--      </li>-->
-    <!--    </ul>-->
+    <template v-if="init">
+    <template v-if="!posts || !posts.length">
+      <h1>No posts for this category</h1>
+    </template>
+    <template v-else>
     <div class="archive" v-for="post in posts" :key="post.id">
       <article class="article"><h2>Post #{{post.id}}</h2>
-        <!-- content -->
         <p>{{post.content}}</p>
-
-
         <button class="button button5" v-on:click="deletePost(post.id)">Delete</button>
         <hr>
         <hr>
       </article>
     </div>
-
+    </template>
+    </template>
   </div>
 </template>
 
@@ -83,6 +76,7 @@ export default defineComponent({
 
   async mounted() {
     await this.getAll()
+    this.init = true
   },
 
 })
@@ -106,9 +100,10 @@ hr.image { /*dummy content*/
 }
 
 .page {
-  padding: 2em;
+  padding: 1.5em;
+  border-radius: 5px;
   text-align: center;
-  background: #cecece;
+  background: #42b983;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -146,11 +141,11 @@ hr.image { /*dummy content*/
 .button5 {
   background-color: white;
   color: black;
-  border: 2px solid #555555;
+  border: 2px solid #42b983;
 }
 
 .button5:hover {
-  background-color: #555555;
+  background-color: #42b983;
   color: white;
 }
 </style>

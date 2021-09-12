@@ -1,19 +1,23 @@
 <template id="addPostForm-component">
   <h1>Add a post</h1>
 
-{{form.name}}
-  {{form.category_id}}
-<h1 v-on:click="selectFirst">HRERRE</h1>
+
   <div class="add_form">
     <form v-on:submit.prevent="submitForm">
       <select v-model="form.category_id" id="listOfCategories">
-        <option v-for="(category,index) in categs" :key="category.id" v-bind:value="category.id" >{{category.name}} {{index}}</option>
+        <option v-for="(category) in categs" :key="category.id" v-bind:value="category.id" >{{category.name}}</option>
       </select>
       <input type="text" id="fname" name="firstname" placeholder="Category name.." v-model="form.content">
-      <div v-if="form.success">
+      <div v-if="form.success == true">
         <div class="success-msg">
           <i class="fa fa-check"></i>
-          Category {{form.name}} was successfully added!
+          Post was successfully added!
+        </div>
+      </div>
+      <div v-if="form.success == false">
+        <div class="error-msg">
+          <i class="fa fa-times-circle"></i>
+          Error! Min length is 2 and max length is 140!
         </div>
       </div>
       <input type="submit" value="Submit">
@@ -35,6 +39,7 @@ export default defineComponent({
       form: {
         content: '',
         category_id: '',
+        success: 'nothing',
       }
     }
 
@@ -56,6 +61,7 @@ export default defineComponent({
             this.form.success = true
           })
           .catch((error) =>{
+            this.form.success = false
             console.warn(error)
           })
     },
@@ -113,7 +119,7 @@ input[type=text], select {
 }
 input[type=submit] {
   width: 100%;
-  background-color: #4CAF50;
+  background-color: #42b983;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
