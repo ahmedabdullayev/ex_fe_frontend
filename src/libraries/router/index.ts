@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Index from '../../views/Index.vue'
 import Posts from '../../views/Posts.vue'
-import User from '../../views/User.vue'
+import CategoryPosts from '../../views/CategoryPosts.vue'
 import AddCategory from '../../views/AddCategory.vue'
 const routes: Array<RouteRecordRaw> = [
   {
@@ -11,21 +11,9 @@ const routes: Array<RouteRecordRaw> = [
   },
 
   {
-    path: '/posts/',
-    name: 'Posts',
-    component: () => import('../../views/Posts.vue')
-
-  },
-  {
     path: '/posts/:category',
     name: 'posts',
-    component: User
-  },
-  {
-    path: '/posts/category',
-    name: 'PostsIndex',
-    component: () => import('../../views/Index.vue')
-
+    component: CategoryPosts
   },
   {
     path: '/category/:query',

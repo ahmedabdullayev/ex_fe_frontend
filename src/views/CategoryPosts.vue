@@ -1,7 +1,7 @@
 <template>
-  <div class="user">
+  <div class="PostsByCategories">
 <!--    <Categories></Categories>-->
-    <back></back>
+<!--    <back></back>-->
 <h1>Category: {{ $route.params.category }}</h1>
 
     <postsByCategories></postsByCategories>
@@ -13,8 +13,8 @@ import {defineComponent} from "vue";
 import postsByCategories from "@/components/postsByCategories";
 import back from "@/components/back";
 export default defineComponent({
-  name: "User",
-  components:{postsByCategories, back}
+  name: "CategoryPosts",
+  components:{postsByCategories}
 
 });
 </script>
