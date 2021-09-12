@@ -1,7 +1,8 @@
 <template>
   <div id="nav">
     <router-link to="/">Categories</router-link> |
-    <router-link to="/category/add">Add categories</router-link>
+    <router-link to="/category/add">Add categories</router-link> |
+    <router-link to="/post/add">Add post</router-link>
 <!--<router-link :to="{ name: 'user', params: { username: 'Grefg' } }"> Greg</router-link>-->
   </div>
   <router-view/>

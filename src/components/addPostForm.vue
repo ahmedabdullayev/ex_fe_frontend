@@ -1,0 +1,130 @@
+<template id="addPostForm-component">
+  <h1>Add a post</h1>
+
+{{form.name}}
+  {{form.category_id}}
+<h1 v-on:click="selectFirst">HRERRE</h1>
+  <div class="add_form">
+    <form v-on:submit.prevent="submitForm">
+      <select v-model="form.category_id" id="listOfCategories">
+        <option v-for="(category,index) in categs" :key="category.id" v-bind:value="category.id" >{{category.name}} {{index}}</option>
+      </select>
+      <input type="text" id="fname" name="firstname" placeholder="Category name.." v-model="form.content">
+      <div v-if="form.success">
+        <div class="success-msg">
+          <i class="fa fa-check"></i>
+          Category {{form.name}} was successfully added!
+        </div>
+      </div>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+</template>
+
+<script>
+import {defineComponent} from "vue";
+import $ from 'jquery'
+import axios from "axios";
+import {mapActions, mapGetters} from "vuex";
+export default defineComponent({
+  name: "addPostForm",
+  data(){
+    return{
+      init: '',
+      categs: '',
+      form: {
+        content: '',
+        category_id: '',
+      }
+    }
+
+  },
+  computed: {
+    ...mapGetters('categories',[
+      'categories'
+    ]),
+
+  },
+  methods: {
+    ...mapActions('categories', [
+      'FETCH_CATEGORIES'
+    ]),
+    submitForm(){
+      axios.post('http://127.0.0.1/post/create', this.form)
+          .then((res) =>{
+            console.warn(res.data)
+            this.form.success = true
+          })
+          .catch((error) =>{
+            console.warn(error)
+          })
+    },
+    async selectFirst(){
+      console.warn('loler')
+      document.getElementById("listOfCategories").selectedIndex = "0";
+    },
+  },
+  async mounted() {
+     await this.FETCH_CATEGORIES();
+    this.categs = this.categories
+    this.form.category_id = this.categs[0]['id']
+   /// this.form.category_id = this.categs[0]
+     console.warn('mount')
+    this.selectFirst()
+    // if(this.categs != ''){
+    //   this.init = true;
+    // }
+  },
+
+
+})
+document.addEventListener("onunload", function(){
+  console.warn(';erere')
+  document.getElementById("listOfCategories").selectedIndex = "0";
+});
+</script>
+
+<style lang="less">
+@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
+
+.success-msg{
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 3px 3px 3px 3px;
+  color: #270;
+  background-color: #DFF2BF;
+}
+@color: white;
+body {
+  background-color: @color;
+}
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.add_form{
+  display: inline-block;
+  width: 50%;
+}
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+
+</style>

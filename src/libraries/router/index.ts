@@ -3,6 +3,7 @@ import Index from '../../views/Index.vue'
 import Posts from '../../views/Posts.vue'
 import CategoryPosts from '../../views/CategoryPosts.vue'
 import AddCategory from '../../views/AddCategory.vue'
+import AddPosts from '../../views/AddPosts.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -24,6 +25,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/category/:query/:category/:id',
     name: 'do',
     component: AddCategory
+  },
+  {
+    path: '/post/add',
+    name: 'addPost',
+    component: AddPosts
   }
 ]
 
