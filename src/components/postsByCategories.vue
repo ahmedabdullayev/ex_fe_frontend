@@ -58,7 +58,7 @@ export default defineComponent({
     },
     deletePost(id){
       //this.posts = ''
-      axios.delete('/delete/post/' + id)
+      axios.delete('http://127.0.0.1/delete/post/' + id)
           .then((res) => {
             for(let i =0; i < this.posts.length; i++){
               if(this.posts[i]['id'] == id){

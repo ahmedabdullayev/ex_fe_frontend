@@ -41,7 +41,7 @@ export default defineComponent({
     submitForm() {
       this.form.id = this.$route.params.id;
          console.warn(this.form.id)
-      axios.put('/category', this.form)
+      axios.put('http://127.0.0.1/category', this.form)
           .then((res) => {
             console.warn(res.data)
             this.form.success = true
