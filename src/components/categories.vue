@@ -4,8 +4,8 @@
   <div v-if="init">
   <div class="wrapper">
     <div class="a" v-for="category in categs" :key="category.id" >
-    <router-link  :to="`/posts/${category.name}`">{{ category.name }}</router-link> |
-    <router-link  :to="`/category/edit/${category.name}/${category.id}`">Edit</router-link>
+    <router-link class="rout" :to="`/posts/${category.name}`">{{ category.name }}</router-link> |
+    <router-link class="rout" :to="`/category/edit/${category.name}/${category.id}`">Edit</router-link>
     </div>
   </div>
   </div>
@@ -60,9 +60,27 @@ export default defineComponent({
   color: #1195c9;
   border: 3px solid @borderColor;
   background: white;
-  padding: 8px 16px;
+  padding: 10px 16px;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
+}
+.rout {
+  border: 5px solid @borderColor;
+  background-color: #42b983;
+  border-radius: 4px;
+  color: white;
+
+  position: relative;
+  text-decoration: none;
+}
+
+.rout:hover {
+  background-color: #227700;
+}
+
+.rout:active {
+  box-shadow: none;
+  top: 5px;
 }
 </style>
