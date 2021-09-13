@@ -1,4 +1,5 @@
 <template>
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <div id="nav">
     <router-link to="/">Categories</router-link> |
     <router-link to="/category/add">Add categories</router-link> |
