@@ -58,7 +58,7 @@ export default defineComponent({
     },
     deletePost(id){
       //this.posts = ''
-      axios.delete('http://127.0.0.1/delete/post/' + id)
+      axios.delete('/delete/post/' + id)
           .then((res) => {
             for(let i =0; i < this.posts.length; i++){
               if(this.posts[i]['id'] == id){
@@ -82,9 +82,10 @@ export default defineComponent({
 })
 </script>
 
-<style>
+<style lang="less">
 
-
+@mainColor: #42b983;
+@whiteColor: #fff;
 hr { /*dummy content*/
   height: 6px;
   border: none;
@@ -103,7 +104,7 @@ hr.image { /*dummy content*/
   padding: 1.5em;
   border-radius: 5px;
   text-align: center;
-  background: #42b983;
+  background: @mainColor;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -118,15 +119,15 @@ hr.image { /*dummy content*/
 
 .article {
   padding: 1em;
-  background: #fff;
+  background: @whiteColor;
   box-shadow:
       0 5px 10px rgba(0, 0, 0, 0.1),
       0 20px 20px rgba(0, 0, 0, 0.05);
 }
 .button {
-  background-color: #4CAF50; /* Green */
+  background-color: @mainColor; /* Green */
   border: none;
-  color: white;
+  color: @whiteColor;
   padding: 16px 32px;
   text-align: center;
   text-decoration: none;
@@ -139,13 +140,13 @@ hr.image { /*dummy content*/
 }
 
 .button5 {
-  background-color: white;
+  background-color: @whiteColor;
   color: black;
-  border: 2px solid #42b983;
+  border: 2px solid @mainColor;
 }
 
 .button5:hover {
-  background-color: #42b983;
-  color: white;
+  background-color: @mainColor;
+  color: @whiteColor;
 }
 </style>

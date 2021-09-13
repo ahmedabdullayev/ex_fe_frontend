@@ -12,7 +12,7 @@
 </div>
 </template>
 
-<script>
+<script lang="ts">
 import {defineComponent} from "vue";
 import { mapGetters, mapActions, mapMutations } from 'vuex';
 export default defineComponent({
@@ -22,8 +22,8 @@ export default defineComponent({
   },
   data(){
     return{
-      categs: '',
-      init: false
+      categs: [] as [],
+      init: false as boolean
     }
   },
   computed: {
@@ -39,7 +39,7 @@ export default defineComponent({
   async mounted() {
     await this.FETCH_CATEGORIES();
     this.categs = this.categories
-    if(this.categs != ''){
+    if(this.categs){
       this.init = true;
     }
   }
@@ -47,23 +47,18 @@ export default defineComponent({
 })
 </script>
 
-<style>
-
-
-
+<style lang="less">
+@borderColor: #4CAF50;
 .wrapper {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: minmax(50px, auto);
   grid-gap: 5px;
 }
-
-
-
 .a {
   margin: 0 3px;
   color: #1195c9;
-  border: 3px solid #4CAF50;
+  border: 3px solid @borderColor;
   background: white;
   padding: 8px 16px;
   border-radius: 4px;

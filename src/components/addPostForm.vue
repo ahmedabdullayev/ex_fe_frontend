@@ -55,7 +55,7 @@ export default defineComponent({
       'FETCH_CATEGORIES'
     ]),
     submitForm(){
-      axios.post('http://127.0.0.1/post/create', this.form)
+      axios.post('/post/create', this.form)
           .then((res) =>{
             console.warn(res.data)
             this.form.success = true
@@ -92,7 +92,7 @@ document.addEventListener("onunload", function(){
 
 <style lang="less">
 @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css');
-
+@color: white;
 .success-msg{
   margin: 10px 0;
   padding: 10px;
@@ -100,7 +100,6 @@ document.addEventListener("onunload", function(){
   color: #270;
   background-color: #DFF2BF;
 }
-@color: white;
 body {
   background-color: @color;
 }
