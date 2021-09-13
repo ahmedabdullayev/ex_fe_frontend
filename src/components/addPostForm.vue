@@ -55,7 +55,7 @@ export default defineComponent({
       'FETCH_CATEGORIES'
     ]),
     submitForm(){
-      axios.post('http://127.0.0.1/post/create', this.form)
+      axios.post('https://zufil.ee/blogger/public/post/create', this.form)
           .then((res) =>{
             console.warn(res.data)
             this.form.success = true

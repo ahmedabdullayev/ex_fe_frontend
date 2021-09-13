@@ -5,7 +5,7 @@ export default {
         return new Promise((resolve, reject)=>{
             axios({
                 method: 'get',
-                url: "http://backendahmedabdullajev.42web.io/blogger/public/categories",
+                url: "https://zufil.ee/blogger/public/categories",
             })
                 .then((response: any)=>{
                     console.warn(response.data)

@@ -37,7 +37,7 @@ export default defineComponent({
   },
   methods: {
     submitForm(){
-      axios.post('http://127.0.0.1/category', this.form)
+      axios.post('https://zufil.ee/blogger/public/category', this.form)
       .then((res) =>{
         console.warn(res.data)
         this.form.success = true
