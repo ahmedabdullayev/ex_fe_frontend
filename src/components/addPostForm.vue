@@ -7,7 +7,7 @@
       <select v-model="form.category_id" id="listOfCategories">
         <option v-for="(category) in categs" :key="category.id" v-bind:value="category.id" >{{category.name}}</option>
       </select>
-      <input type="text" id="fname" name="firstname" placeholder="Category name.." v-model="form.content">
+      <input type="text" id="fname" name="firstname" placeholder="Post a content.." v-model="form.content">
       <div v-if="form.success == true">
         <div class="success-msg">
           <i class="fa fa-check"></i>
