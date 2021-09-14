@@ -48,13 +48,28 @@ export default defineComponent({
 </script>
 
 <style lang="less">
+@desktop:   ~"only screen and (min-width: 501px) ";
+@phone:    ~"only screen and (max-width: 500px)";
+
 @borderColor: #4CAF50;
-.wrapper {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: minmax(50px, auto);
-  grid-gap: 5px;
+
+@media @phone {
+  .wrapper {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-auto-rows: minmax(50px, auto);
+    grid-gap: 5px;
+  }
 }
+@media @desktop {
+  .wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(50px, auto);
+    grid-gap: 5px;
+  }
+}
+
 .a {
   margin: 0 3px;
   color: #1195c9;
