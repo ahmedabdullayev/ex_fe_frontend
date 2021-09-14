@@ -83,6 +83,8 @@ export default defineComponent({
 </script>
 
 <style lang="less">
+@desktop:   ~"only screen and (min-width: 501px) ";
+@phone:    ~"only screen and (max-width: 500px)";
 
 @mainColor: #42b983;
 @whiteColor: #fff;
@@ -100,16 +102,31 @@ hr.image { /*dummy content*/
   padding-bottom: 50%;
 }
 
-.page {
-  padding: 1.5em;
-  border-radius: 5px;
-  text-align: center;
-  background: @mainColor;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 40%;
+@media @phone {
+  .page {
+    padding: 1em;
+    border-radius: 5px;
+    text-align: center;
+    background: @mainColor;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+  }
 }
+@media @desktop {
+  .page {
+    padding: 1.5em;
+    border-radius: 5px;
+    text-align: center;
+    background: @mainColor;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+  }
+}
+
 
 .archive {
   display: grid;
