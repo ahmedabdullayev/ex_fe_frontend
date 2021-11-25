@@ -18,10 +18,12 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import {defineComponent} from "vue";
 import { mapGetters, mapActions, mapMutations } from 'vuex';
 import axios from "axios";
+import Post from '@/types/Post'
+
 export default defineComponent({
   name: "postsByCategories",
   props:{
@@ -29,8 +31,8 @@ export default defineComponent({
   },
   data(){
     return{
-      posts: '',
-      cat: '',
+      posts: [] as Post[],
+      cat: '' as string,
       init: false,
       update: true,
     }
@@ -51,12 +53,12 @@ export default defineComponent({
       'FETCH_POSTS'
     ]),
     async getAll(){
-      this.cat = this.$route.params.category
+      this.cat = this.$route.params.category as string
       console.warn(this.cat)
       await this.FETCH_POSTS(this.cat);
       this.posts = this.post
     },
-    deletePost(id){
+    deletePost(id : any){
       //this.posts = ''
       axios.delete('https://zufil.ee/blogger/public/delete/post/' + id)
           .then((res) => {

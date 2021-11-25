@@ -1,13 +1,18 @@
 <template id="categories-component">
 <div>
 
-  <div v-if="init">
   <div class="wrapper">
-    <div class="a" v-for="category in categs" :key="category.id" >
+    <h1>Hello</h1>
+    <div class="a" v-for="category in categories" :key="category.id" >
+      <h1>{{ category.name }}</h1>
     <router-link class="rout" :to="`/posts/${category.name}`">{{ category.name }}</router-link> |
     <router-link class="rout" :to="`/category/edit/${category.name}/${category.id}`">Edit</router-link>
     </div>
-  </div>
+    <input v-model="firstName" />
+    <input v-model="lastName" />
+
+    {{fullName}}
+<!--    <HelloWorld msg="brat"></HelloWorld>-->
   </div>
 </div>
 </template>
@@ -15,6 +20,8 @@
 <script lang="ts">
 import {defineComponent} from "vue";
 import { mapGetters, mapActions, mapMutations } from 'vuex';
+import Categories from "@/types/Categories"
+import HelloWorld from "@/components/HelloWorld.vue";
 export default defineComponent({
   name: "categories",
   props:{
@@ -22,19 +29,38 @@ export default defineComponent({
   },
   data(){
     return{
-      categs: [] as [],
-      init: false as boolean
+      firstName: 'Foo' as string,
+      lastName: 'Bar' as string,
+      categs: [] as Categories[],
+      init: false as boolean,
     }
   },
   computed: {
+    fullName () {
+      // `this` points to the vm instance
+      //  this.FETCH_CATEGORIES();
+      console.warn(this.firstName + " " + this.lastName)
+      return this.firstName + " " + this.lastName
+    },
     ...mapGetters('categories',[
         'categories'
     ])
+
+
   },
   methods:{
     ...mapActions('categories', [
         'FETCH_CATEGORIES'
-    ])
+    ]),
+
+  },
+  watch: {
+    categories(newValue, oldValue){
+      console.warn("WATHGFHH AFDDSDFFAAFDAFFDFDS")
+      console.log(newValue)
+      console.log(this.categories)
+      this.categs = newValue
+    }
   },
   async mounted() {
     await this.FETCH_CATEGORIES();
@@ -43,6 +69,7 @@ export default defineComponent({
       this.init = true;
     }
   }
+
 
 })
 </script>

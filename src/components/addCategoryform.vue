@@ -21,31 +21,49 @@
 </div>
 </template>
 
-<script>
+<script lang="ts">
 import {defineComponent} from "vue";
 import axios from "axios";
-import css from '@/assets/category-style.less'
+import {mapActions, mapGetters} from "vuex";
+import Categories from "@/types/Categories"
 export default defineComponent({
   name: "addCategoryform",
+  components:{},
   data(){
     return{
       form: {
         name: '',
-        success: 'nothing',
+        success: 'nothing' as unknown as boolean,
+        cats: [] as Categories[]
       }
     }
   },
+  computed: {
+    ...mapGetters('categories',[
+      'categories'
+    ]),
+  },
   methods: {
+    ...mapActions('categories', [
+      'FETCH_CATEGORIES'
+    ]),
+
     submitForm(){
-      axios.post('https://zufil.ee/blogger/public/category', this.form)
-      .then((res) =>{
-        console.warn(res.data)
+      axios.post('/category', this.form)
+      .then(async (res) => {
+         await this.FETCH_CATEGORIES()
+        // this.categories()
+       // await this.getDatas()
         this.form.success = true
       })
       .catch((error) =>{
         this.form.success = false
         console.warn(error)
       })
+    },
+    async getDatas(){
+      this.form.cats = this.categories
+      console.log(this.form.cats)
     }
   },
   mounted() {
