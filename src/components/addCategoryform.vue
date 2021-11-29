@@ -52,6 +52,7 @@ export default defineComponent({
       axios.post('/category', this.form)
       .then(async (res) => {
          await this.FETCH_CATEGORIES()
+        console.warn(res)
         // this.categories()
        // await this.getDatas()
         this.form.success = true

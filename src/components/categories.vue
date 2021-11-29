@@ -2,16 +2,14 @@
 <div>
 
   <div class="wrapper">
-    <h1>Hello</h1>
     <div class="a" v-for="category in categories" :key="category.id" >
       <h1>{{ category.name }}</h1>
     <router-link class="rout" :to="`/posts/${category.name}`">{{ category.name }}</router-link> |
     <router-link class="rout" :to="`/category/edit/${category.name}/${category.id}`">Edit</router-link>
     </div>
-    <input v-model="firstName" />
-    <input v-model="lastName" />
-
-    {{fullName}}
+<!--    <input v-model="firstName" />-->
+<!--    <input v-model="lastName" />-->
+<!--    {{fullName}}-->
 <!--    <HelloWorld msg="brat"></HelloWorld>-->
   </div>
 </div>
@@ -45,7 +43,6 @@ export default defineComponent({
     ...mapGetters('categories',[
         'categories'
     ])
-
 
   },
   methods:{

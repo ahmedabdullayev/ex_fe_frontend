@@ -31,15 +31,16 @@ describe('categories',  () => {
         // await wrapper.trigger('mounted')
         //    await wrapper.trigger('mounted')
         //    await wrapper.vm.$nextTick()
-        await wrapper.vm.$nextTick()
-        expect(wrapper.html()).toContain("Football")
-        //    const body = {id: 1, name: "Cars"}
-        //    wrapper.vm.$store.commit("categories/setAllCategories",body)
-        //    await wrapper.vm.$nextTick()
-        //    expect(wrapper.vm.categories).toStrictEqual(body)
-        //    await flushPromises()
-        //    // expect(wrapper.text()).toMatch("Cars")
-        //    expect(wrapper.vm.categories).not.toBe(null)
+        //test 1
+        // await wrapper.vm.$nextTick()
+        // expect(wrapper.html()).toContain("Football")
+        //test no 2
+           const body = [{id: 1, name: "Cars"}]
+           wrapper.vm.$store.commit("categories/setAllCategories",body)
+           await wrapper.vm.$nextTick()
+           expect(wrapper.vm.categories).toStrictEqual(body)
+           expect(wrapper.text()).toMatch("Cars")
+           expect(wrapper.vm.categories).not.toBe(null)
 
     })
     test("routs", async () => {

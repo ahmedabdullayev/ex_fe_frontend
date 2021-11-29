@@ -1,5 +1,5 @@
 <template>
-  <categories :key="componentKey"></categories>
+<!--  <categories :key="componentKey"></categories>-->
 
   <div id="nav">
     <router-link to="/">Categories</router-link> |
@@ -14,28 +14,12 @@
 import {defineComponent} from "vue";
 import categories from "@/components/categories.vue";
 export default defineComponent({
-  components: {categories},
+  // components: {categories},
   data() {
     return {
-      componentKey: 0 as number,
     };
   },
 
-
-  methods:{
-    updateCount(){
-      this.componentKey ++
-
-    }
-  },
-  mounted() {
-    // setInterval(() =>{
-    //   this.updateCount()
-    // }, 1000)
-  },
-  beforeCreate() {
-    console.log('At this point, events and lifecycle have been initialized.')
-  }
 
 })
 </script>

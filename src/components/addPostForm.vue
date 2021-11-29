@@ -4,7 +4,7 @@
 
   <div class="add_form">
     <form v-on:submit.prevent="submitForm">
-      <select v-model="form.category_id" id="listOfCategories">
+      <select v-model="form.categories_id" id="listOfCategories">
         <option v-for="(category) in categs" :key="category.id" v-bind:value="category.id" >{{category.name}}</option>
       </select>
       <input type="text" id="fname" name="firstname" placeholder="Post a content.." v-model="form.content">
@@ -38,7 +38,7 @@ export default defineComponent({
       categs: '',
       form: {
         content: '',
-        category_id: '',
+        categories_id: '',
         success: 'nothing',
       }
     }
@@ -73,7 +73,7 @@ export default defineComponent({
   async mounted() {
      await this.FETCH_CATEGORIES();
     this.categs = this.categories
-    this.form.category_id = this.categs[0]['id']
+    this.form.categories_id = this.categs[0]['id']
    /// this.form.category_id = this.categs[0]
      console.warn('mount')
     this.selectFirst()

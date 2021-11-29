@@ -1,14 +1,14 @@
 <template >
   <div class="page">
     <template v-if="init">
-    <template v-if="!posts || !posts.length">
+    <template v-if="!post || !post.length">
       <h1>No posts for this category</h1>
     </template>
     <template v-else>
-    <div class="archive" v-for="post in posts" :key="post.id">
-      <article class="article"><h2>Post #{{post.id}}</h2>
-        <p>{{post.content}}</p>
-        <button class="button button5" v-on:click="deletePost(post.id)">Delete</button>
+    <div class="archive" v-for="pos in post" :key="pos.id">
+      <article class="article"><h2>Post #{{pos.id}}</h2>
+        <p>{{pos.content}}</p>
+        <button class="button button5" v-on:click="deletePost(pos.id)">Delete</button>
         <hr>
         <hr>
       </article>
@@ -60,13 +60,14 @@ export default defineComponent({
     },
     deletePost(id : any){
       //this.posts = ''
-      axios.delete('https://zufil.ee/blogger/public/delete/post/' + id)
-          .then((res) => {
-            for(let i =0; i < this.posts.length; i++){
-              if(this.posts[i]['id'] == id){
-                this.posts.splice(i, 1);
-              }
-            }
+      axios.delete('delete/post/' + id)
+          .then(async (res) => {
+            await this.FETCH_POSTS(this.cat);
+            // for(let i =0; i < this.posts.length; i++){
+            //   if(this.posts[i]['id'] == id){
+            //     this.posts.splice(i, 1);
+            //   }
+            // }
             console.warn(res.data)
           })
           .catch((error) => {

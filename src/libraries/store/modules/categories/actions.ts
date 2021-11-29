@@ -8,7 +8,7 @@ export default {
                 url: "/categories",
             })
                 .then((response: any)=>{
-                    console.warn(response.data)
+                    console.warn(response)
                     context.commit("setAllCategories", response.data)
                     resolve(response)
                 })
