@@ -52,9 +52,7 @@ export default defineComponent({
           })
     }
   },
-  mounted() {
-    console.warn('lol')
-  }
+
 })
 
 </script>

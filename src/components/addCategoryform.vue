@@ -53,8 +53,6 @@ export default defineComponent({
       .then(async (res) => {
          await this.FETCH_CATEGORIES()
         console.warn(res)
-        // this.categories()
-       // await this.getDatas()
         this.form.success = true
       })
       .catch((error) =>{

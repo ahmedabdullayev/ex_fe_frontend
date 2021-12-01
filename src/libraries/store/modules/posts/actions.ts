@@ -6,7 +6,7 @@ import { Commit } from "vuex";
 
 import PostState from "@/types/PostState";
 export default {
-    FETCH_POSTS({ commit }: { commit: Commit }, category: string){
+    FETCH_POSTS({ commit }: { commit: Commit }, category: string) : Promise<AxiosResponse>{
         return new Promise((resolve, reject)=>{
             axios({
                 method: 'get',

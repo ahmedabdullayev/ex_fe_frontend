@@ -66,7 +66,6 @@ export default defineComponent({
           })
     },
     async selectFirst(){
-      console.warn('loler')
       document.getElementById("listOfCategories").selectedIndex = "0";
     },
   },

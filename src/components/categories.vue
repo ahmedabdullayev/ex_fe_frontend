@@ -7,10 +7,6 @@
     <router-link class="rout" :to="`/posts/${category.name}`">{{ category.name }}</router-link> |
     <router-link class="rout" :to="`/category/edit/${category.name}/${category.id}`">Edit</router-link>
     </div>
-<!--    <input v-model="firstName" />-->
-<!--    <input v-model="lastName" />-->
-<!--    {{fullName}}-->
-<!--    <HelloWorld msg="brat"></HelloWorld>-->
   </div>
 </div>
 </template>
@@ -34,12 +30,6 @@ export default defineComponent({
     }
   },
   computed: {
-    fullName () {
-      // `this` points to the vm instance
-      //  this.FETCH_CATEGORIES();
-      console.warn(this.firstName + " " + this.lastName)
-      return this.firstName + " " + this.lastName
-    },
     ...mapGetters('categories',[
         'categories'
     ])
@@ -53,7 +43,7 @@ export default defineComponent({
   },
   watch: {
     categories(newValue, oldValue){
-      console.warn("WATHGFHH AFDDSDFFAAFDAFFDFDS")
+      console.warn("For testing purpose")
       console.log(newValue)
       console.log(this.categories)
       this.categs = newValue

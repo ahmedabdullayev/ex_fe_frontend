@@ -63,6 +63,7 @@ export default defineComponent({
       axios.delete('delete/post/' + id)
           .then(async (res) => {
             await this.FETCH_POSTS(this.cat);
+            // if we use computed, dont even need code bellow
             // for(let i =0; i < this.posts.length; i++){
             //   if(this.posts[i]['id'] == id){
             //     this.posts.splice(i, 1);
