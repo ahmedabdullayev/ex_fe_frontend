@@ -1,11 +1,12 @@
 <template >
   <div class="page">
     <template v-if="init">
-    <template v-if="!post || !post.length">
+    <template v-if="!filteredPost('') || !filteredPost('').length">
       <h1>No posts for this category</h1>
     </template>
     <template v-else>
-    <div class="archive" v-for="pos in post" :key="pos.id">
+      <input type="text" id="fname" name="firstname" placeholder="Find posts by their content(text).." v-on:keyup="filterPosts()" v-model="search">
+    <div class="archive" v-for="pos in posts" :key="pos.id">
       <article class="article"><h2>Post #{{pos.id}}</h2>
         <p>{{pos.content}}</p>
         <button class="button button5" v-on:click="deletePost(pos.id)">Delete</button>
@@ -21,29 +22,30 @@
 <script lang="ts">
 import {defineComponent} from "vue";
 import { mapGetters, mapActions, mapMutations } from 'vuex';
+import _ from "lodash";
 import axios from "axios";
 import Post from '@/types/Post'
 
 export default defineComponent({
   name: "postsByCategories",
   props:{
-
+    categoryProp: String,
+    parentMethod : Function
   },
   data(){
     return{
       posts: [] as Post[],
-      cat: '' as string,
       init: false,
-      update: true,
+      search: "" as string
     }
   },
   computed: {
+    ...mapGetters('post',[
+      'filteredPost',
+    ]),
     ...mapGetters('categories',[
       'categories'
     ]),
-    ...mapGetters('post',[
-      'post'
-    ])
   },
   methods:{
     ...mapActions('categories', [
@@ -53,28 +55,25 @@ export default defineComponent({
       'FETCH_POSTS'
     ]),
     async getAll(){
-      this.cat = this.$route.params.category as string
-      console.warn(this.cat)
-      await this.FETCH_POSTS(this.cat);
-      this.posts = this.post
+      await this.FETCH_POSTS(this.categoryProp)
+      this.posts = this.filteredPost('');
     },
-    deletePost(id : any){
-      //this.posts = ''
+    filterPosts(){
+      this.posts = this.filteredPost(this.search)
+    },
+    deletePost(id : number){
       axios.delete('delete/post/' + id)
           .then(async (res) => {
-            await this.FETCH_POSTS(this.cat);
-            // if we use computed, dont even need code bellow
-            // for(let i =0; i < this.posts.length; i++){
-            //   if(this.posts[i]['id'] == id){
-            //     this.posts.splice(i, 1);
-            //   }
-            // }
+            await this.FETCH_POSTS(this.categoryProp);
+            this.posts = this.filteredPost('')
             console.warn(res.data)
           })
           .catch((error) => {
             console.warn(error)
           })
-
+      if(this.parentMethod) { // just for parent method testing purpose..
+        this.parentMethod();
+      }
     }
   },
 

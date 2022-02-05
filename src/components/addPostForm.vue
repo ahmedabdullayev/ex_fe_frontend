@@ -1,20 +1,19 @@
 <template id="addPostForm-component">
-  <h1>Add a post</h1>
-
-
+  <h1>Add post</h1>
   <div class="add_form">
     <form v-on:submit.prevent="submitForm">
+      <p class="addpost_label">Choose a category for your post</p>
       <select v-model="form.categories_id" id="listOfCategories">
-        <option v-for="(category) in categs" :key="category.id" v-bind:value="category.id" >{{category.name}}</option>
+        <option v-for="(category) in categories" :key="category.id" v-bind:value="category.id" >{{category.name}}</option>
       </select>
-      <input type="text" id="fname" name="firstname" placeholder="Post a content.." v-model="form.content">
-      <div v-if="form.success == true">
+      <input type="text" id="fname" name="firstname" placeholder="Text for post.." v-model="form.content">
+      <div v-if="success">
         <div class="success-msg">
           <i class="fa fa-check"></i>
           Post was successfully added!
         </div>
       </div>
-      <div v-if="form.success == false">
+      <div v-if="errorArray.length">
         <div class="error-msg">
           <i class="fa fa-times-circle"></i>
           Error! Min length is 2 and max length is 140!
@@ -24,23 +23,18 @@
     </form>
   </div>
 </template>
-
-<script>
+<script lang="ts">
 import {defineComponent} from "vue";
-import $ from 'jquery'
 import axios from "axios";
 import {mapActions, mapGetters} from "vuex";
+import Post from "@/types/Post";
 export default defineComponent({
   name: "addPostForm",
   data(){
     return{
-      init: '',
-      categs: '',
-      form: {
-        content: '',
-        categories_id: '',
-        success: 'nothing',
-      }
+      errorArray: [] as string[],
+      success: false as boolean,
+      form: {} as Post, // form data
     }
 
   },
@@ -58,35 +52,24 @@ export default defineComponent({
       axios.post('/post/create', this.form)
           .then((res) =>{
             console.warn(res.data)
-            this.form.success = true
+            this.errorArray = []
+            this.success = true
           })
           .catch((error) =>{
-            this.form.success = false
+            this.errorArray.push(error);
+            this.success = false;
             console.warn(error)
           })
-    },
-    async selectFirst(){
-      document.getElementById("listOfCategories").selectedIndex = "0";
     },
   },
   async mounted() {
      await this.FETCH_CATEGORIES();
-    this.categs = this.categories
-    this.form.categories_id = this.categs[0]['id']
-   /// this.form.category_id = this.categs[0]
-     console.warn('mount')
-    this.selectFirst()
-    // if(this.categs != ''){
-    //   this.init = true;
-    // }
+    this.form.categories_id = this.categories[0]['id']
+    console.warn('mount')
   },
 
 
 })
-document.addEventListener("onunload", function(){
-  console.warn(';erere')
-  document.getElementById("listOfCategories").selectedIndex = "0";
-});
 </script>
 
 <style lang="less">
@@ -101,6 +84,10 @@ document.addEventListener("onunload", function(){
 }
 body {
   background-color: @color;
+}
+.addpost_label{
+  text-align: left;
+  margin-bottom: 0px;
 }
 input[type=text], select {
   width: 100%;

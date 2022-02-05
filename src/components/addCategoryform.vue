@@ -1,16 +1,15 @@
 <template id="addCategoryform-component">
   <h1>Add a category</h1>
-
   <div class="add_form">
   <form v-on:submit.prevent="submitForm">
     <input type="text" id="fname" name="firstname" placeholder="Category name.." v-model="form.name">
-    <div v-if="form.success == true">
+    <div v-if="success">
     <div class="success-msg">
       <i class="fa fa-check"></i>
       Category {{form.name}} was successfully added!
     </div>
     </div>
-    <div v-if="form.success == false">
+    <div v-if="errorArray.length">
       <div class="error-msg">
         <i class="fa fa-times-circle"></i>
         Error! Max length is 15 and min is 3! Also could be same category name!
@@ -31,11 +30,9 @@ export default defineComponent({
   components:{},
   data(){
     return{
-      form: {
-        name: '',
-        success: 'nothing' as unknown as boolean,
-        cats: [] as Categories[]
-      }
+      errorArray: [] as string[],
+      success: false as boolean,
+      form: {} as Categories // for the form
     }
   },
   computed: {
@@ -45,32 +42,29 @@ export default defineComponent({
   },
   methods: {
     ...mapActions('categories', [
-      'FETCH_CATEGORIES'
+      'FETCH_CATEGORIES',
     ]),
 
     submitForm(){
       axios.post('/category', this.form)
       .then(async (res) => {
-         await this.FETCH_CATEGORIES()
+        this.errorArray = []
+        this.success = true
         console.warn(res)
-        this.form.success = true
       })
       .catch((error) =>{
-        this.form.success = false
+        this.errorArray.push(error);
+        this.success = false;
         console.warn(error)
       })
     },
-    async getDatas(){
-      this.form.cats = this.categories
-      console.log(this.form.cats)
-    }
   },
   mounted() {
-    console.warn(this.form.success)
+    console.warn(this.success)
   }
 })
 
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 </style>

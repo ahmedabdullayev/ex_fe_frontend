@@ -1,67 +1,55 @@
 <template id="categories-component">
 <div>
-
   <div class="wrapper">
+<!--    <template v-if="load == true">-->
+<!--      <h1>Loading...</h1>-->
+<!--    </template>-->
     <div class="a" v-for="category in categories" :key="category.id" >
-      <h1>{{ category.name }}</h1>
+      <h2>{{ category.name }}</h2>
     <router-link class="rout" :to="`/posts/${category.name}`">{{ category.name }}</router-link> |
     <router-link class="rout" :to="`/category/edit/${category.name}/${category.id}`">Edit</router-link>
     </div>
   </div>
+
 </div>
 </template>
 
 <script lang="ts">
 import {defineComponent} from "vue";
 import { mapGetters, mapActions, mapMutations } from 'vuex';
-import Categories from "@/types/Categories"
-import HelloWorld from "@/components/HelloWorld.vue";
+import Categories from "@/types/Categories";
 export default defineComponent({
   name: "categories",
-  props:{
-
-  },
+  props:{},
   data(){
     return{
-      firstName: 'Foo' as string,
-      lastName: 'Bar' as string,
-      categs: [] as Categories[],
-      init: false as boolean,
+      //properties here..
+      load: true as boolean
     }
   },
   computed: {
     ...mapGetters('categories',[
         'categories'
     ])
-
   },
   methods:{
     ...mapActions('categories', [
-        'FETCH_CATEGORIES'
+        'FETCH_CATEGORIES',
     ]),
-
-  },
-  watch: {
-    categories(newValue, oldValue){
-      console.warn("For testing purpose")
-      console.log(newValue)
-      console.log(this.categories)
-      this.categs = newValue
-    }
   },
   async mounted() {
-    await this.FETCH_CATEGORIES();
-    this.categs = this.categories
-    if(this.categs){
-      this.init = true;
+    try {
+      let fetch = await this.FETCH_CATEGORIES()
+      console.log(fetch)
+     // this.load = false;
+    } catch (e){
+      console.error("Request failed, please refresh page")
     }
   }
 
-
 })
 </script>
-
-<style lang="less">
+<style lang="less" scoped>
 @desktop:   ~"only screen and (min-width: 501px) ";
 @phone:    ~"only screen and (max-width: 500px)";
 
@@ -89,7 +77,7 @@ export default defineComponent({
   color: #1195c9;
   border: 3px solid @borderColor;
   background: white;
-  padding: 10px 16px;
+  padding-bottom: 10px;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
