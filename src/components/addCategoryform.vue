@@ -12,7 +12,7 @@
     <div v-if="errorArray.length">
       <div class="error-msg">
         <i class="fa fa-times-circle"></i>
-        Error! Max length is 15 and min is 3! Also could be same category name!
+        Error! Max length is 15 and min is 3!Also categories names should be different!
       </div>
     </div>
     <input type="submit" value="Submit">
