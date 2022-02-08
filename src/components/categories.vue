@@ -51,8 +51,8 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 @desktop:   ~"only screen and (min-width: 845px)";
-@desktopMedium: ~"only screen and (max-width: 845px) and (min-width: 500px)";
-@desktopSmall: ~"only screen and (max-width: 501px) and (min-width: 400px)";
+@desktopMedium: ~"only screen and (max-width: 845px) and (min-width: 600px)";
+@desktopSmall: ~"only screen and (max-width: 601px) and (min-width: 400px)";
 @phone:    ~"only screen and (max-width: 401px)";
 
 @borderColor: #4CAF50;
@@ -86,7 +86,7 @@ export default defineComponent({
 }
 @media @desktopSmall {
   .wrapper {
-    padding: 0 calc(70% - 270px);
+    padding: 0 calc(70% - 330px);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: minmax(50px, auto);
