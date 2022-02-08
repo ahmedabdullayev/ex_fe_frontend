@@ -50,13 +50,16 @@ export default defineComponent({
 })
 </script>
 <style lang="less" scoped>
-@desktop:   ~"only screen and (min-width: 501px) ";
-@phone:    ~"only screen and (max-width: 500px)";
+@desktop:   ~"only screen and (min-width: 845px)";
+@desktopMedium: ~"only screen and (max-width: 845px) and (min-width: 500px)";
+@desktopSmall: ~"only screen and (max-width: 501px) and (min-width: 400px)";
+@phone:    ~"only screen and (max-width: 401px)";
 
 @borderColor: #4CAF50;
 
 @media @phone {
   .wrapper {
+    padding: 0 calc(40% - 110px);
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-auto-rows: minmax(50px, auto);
@@ -65,8 +68,27 @@ export default defineComponent({
 }
 @media @desktop {
   .wrapper {
+    padding: 0 calc(30% - 270px);
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(50px, auto);
+    grid-gap: 5px;
+  }
+}
+@media @desktopMedium {
+  .wrapper {
+    padding: 0 calc(40% - 270px);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(50px, auto);
+    grid-gap: 5px;
+  }
+}
+@media @desktopSmall {
+  .wrapper {
+    padding: 0 calc(70% - 270px);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: minmax(50px, auto);
     grid-gap: 5px;
   }
