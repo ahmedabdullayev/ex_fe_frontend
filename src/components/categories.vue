@@ -52,8 +52,8 @@ export default defineComponent({
 <style lang="less" scoped>
 @desktop:   ~"only screen and (min-width: 845px)";
 @desktopMedium: ~"only screen and (max-width: 845px) and (min-width: 600px)";
-@desktopSmall: ~"only screen and (max-width: 601px) and (min-width: 400px)";
-@phone:    ~"only screen and (max-width: 401px)";
+@desktopSmall: ~"only screen and (max-width: 601px) and (min-width: 500px)";
+@phone:    ~"only screen and (max-width: 501px)";
 
 @borderColor: #4CAF50;
 
